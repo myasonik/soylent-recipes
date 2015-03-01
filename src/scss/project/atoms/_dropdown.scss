@@ -1,0 +1,11 @@
+.dropdown {
+	&:after {
+		$dimension: .5em;
+		content: '';
+		display: inline-block;
+		border-top: $dimension solid currentColor;
+		border-left: $dimension/2 solid transparent;
+		border-right: $dimension/2 solid transparent;
+		margin-left: $dimension/2;
+	}
+}

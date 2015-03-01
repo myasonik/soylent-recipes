@@ -1,19 +1,15 @@
 var $ = require('./common.js');
 var config = require('./config.js');
 
-var connect = require('gulp-connect');
 var browserSync = require('browser-sync');
+var historyApiFallback = require('connect-history-api-fallback');
 
 $.gulp.task('watching', function() {
 	browserSync({
 		server: { baseDir: config.dest },
+		middleware: [ historyApiFallback ],
 		notify: false,
 		open: false
-	});
-
-	connect.server({
-		root: config.dest,
-		livereload: true,
 	});
 
 	$.gulp.watch(config.src + 'jade/**/*.jade', ['templates']);
@@ -22,8 +18,7 @@ $.gulp.task('watching', function() {
 	$.gulp.watch(config.src + 'js/**/*.js', ['lint-js']);
 	$.gulp.watch(config.watchDest, function(e) {
 		$.gulp.src(e.path)
-			.pipe(browserSync.reload({ stream:true }))
-			.pipe(connect.reload());
+			.pipe(browserSync.reload({ stream:true }));
 	});
 
 });

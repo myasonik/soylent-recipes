@@ -1,0 +1,8 @@
+header {
+	@extend %cf;
+	
+	> h1 {
+		font-size: 1em;
+		float: left;
+	}
+}

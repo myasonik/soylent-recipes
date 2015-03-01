@@ -1,9 +1,7 @@
-include /mixins/if-ie
-
 doctype html
 html(lang="en")
 	head
-		title
+		title Soylent Recipes
 
 		meta(charset='UTF-8')
 		meta(name='viewport', content='width=device-width, minimal-ui, initial-scale=1')
@@ -19,6 +17,11 @@ html(lang="en")
 	body
 		block body
 
+		footer
+			p
+				span.icon.icon--user User 
+				| created by Jens Tärning
+	
 	if !production
 		script(src='main.js')
 	else

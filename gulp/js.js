@@ -45,6 +45,6 @@ $.gulp.task('js', ['lint-js'], function() {
 		});
 	}
 
-	b.add('./' + config.src + '/js/main.js')
+	b.add('./' + config.src + '/js/main.jsx')
 	doBrowserify(b);
 });
