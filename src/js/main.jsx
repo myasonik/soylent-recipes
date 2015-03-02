@@ -6,16 +6,18 @@ var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 
 var Header = require('./components/sections/header.jsx');
+var Footer = require('./components/sections/footer.jsx');
 var Home = require('./components/views/home.jsx');
 var Account = require('./components/views/account.jsx');
 
 var App = React.createClass({
 	render() {
 		return (
-			<div>
+			<body>
 				<Header />
 				<RouteHandler />
-			</div>
+				<Footer />
+			</body>
 		);
 	}
 });

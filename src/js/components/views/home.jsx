@@ -4,7 +4,7 @@ var Home = React.createClass({
 	render() {
 		return (
 			<main>
-				<p>Test</p>
+				<p>Home</p>
 			</main>
 		);
 	}
