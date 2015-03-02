@@ -1,7 +1,9 @@
 var React = require('react');
 var Reflux = require('reflux');
+
 var Login = require('../atoms/login.jsx');
 var ProfileWidget = require('./profileWidget.jsx');
+
 var sessionStore = require('../../stores/sessionStore');
 
 var User = React.createClass({

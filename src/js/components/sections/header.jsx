@@ -1,4 +1,5 @@
 var React = require('react');
+
 var User = require('../molecules/user.jsx');
 
 var Header = React.createClass({

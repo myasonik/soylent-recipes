@@ -1,15 +1,22 @@
 var React = require('react');
+var Link = require('react-router').Link;
+
+var actions = require('../../actions/sessionActions');
 
 var Account = React.createClass({
+	handleClick() {
+		actions.logout();
+	},
+
 	render() {
 		return (
 			<main>
-				<button className='btn'>
+				<Link to='app' className='btn' onClick={this.handleClick} >
 					Logout
-				</button>
+				</Link>
 			</main>
 		);
 	}
 });
 
-module.exports = Account; 
+module.exports = Account;

@@ -1,27 +1,6 @@
 var React = require('react');
-var actions = require('../../actions/sessionActions');
+var Link = require('react-router').Link;
 var MQ = require('react-responsive');
-
-/*
-var ProfileWidget = React.createClass({
-	handleClick: function() {
-	   actions.logout();
-	},
-	
-	render: function() { 
-		return (
-			<div>
-				<button
-					className='btn'
-					onClick = {this.handleClick}
-				>
-					Logout
-				</button>
-			</div>
-		);
-	}
-});
-*/
 
 var ProfileWidget = React.createClass({
 	newPost() {
@@ -34,22 +13,22 @@ var ProfileWidget = React.createClass({
 		return (
 			<div className='profile-widget'>
 				<MQ maxWidth={479}>
-					<button className='btn icon icon--user'>
+					<Link to='account' className='btn icon icon--user'>
 						{username}
-					</button>
+					</Link>
 				</MQ>
 				<MQ minWidth={480} maxWidth={719}>
-					<button className='btn dropdown'>
+					<Link to='account' className='btn dropdown'>
 						{username}
-					</button>
+					</Link>
 				</MQ>
 				<MQ minWidth={720}>
 					<button className='btn'>
 						+ New Post
 					</button>
-					<button className='btn'>
+					<Link to='account' className='btn'>
 						{username}
-					</button>
+					</Link>
 				</MQ>
 			</div>
 		);
