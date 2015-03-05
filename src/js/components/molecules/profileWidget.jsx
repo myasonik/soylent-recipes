@@ -3,10 +3,6 @@ var Link = require('react-router').Link;
 var MQ = require('react-responsive');
 
 var ProfileWidget = React.createClass({
-	newPost() {
-
-	},
-	
 	render() {
 		var username = this.props.name;
 		
@@ -23,9 +19,9 @@ var ProfileWidget = React.createClass({
 					</Link>
 				</MQ>
 				<MQ minWidth={720}>
-					<button className='btn'>
+					<Link to='new' className='btn'>
 						+ New Post
-					</button>
+					</Link>
 					<Link to='account' className='btn'>
 						{username}
 					</Link>
