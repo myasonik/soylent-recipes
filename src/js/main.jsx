@@ -1,3 +1,4 @@
+require('babel/register');
 var React = require('react');
 var Router = require('react-router');
 var RouteHandler = require('react-router').RouteHandler;

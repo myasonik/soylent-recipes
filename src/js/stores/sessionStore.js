@@ -24,6 +24,7 @@ var sessionStore = Reflux.createStore({
 					auth: true
 				};
 			} else {
+				console.log('Login Error');
 				this.user = userData;
 			}
 			

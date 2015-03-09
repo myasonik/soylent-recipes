@@ -5,8 +5,7 @@ var usersRef = ref.child('users');
 
 var actions = Reflux.createActions([
 	'login',
-	'logout',
-	'register'
+	'logout'
 ]);
 
 actions.login.preEmit = function() {

@@ -1,40 +1,52 @@
 var React = require('react');
 var Router = require('react-router');
 
+var actions = require('../../actions/recipeActions');
+
 var New = React.createClass({
 	mixins: [ Router.Navigation ],
 
 	handleSubmit() {
 		event.preventDefault();
+		actions.add(Object.assign({
+			creator: 'me'
+		}, this.getFormData()));
 		this.transitionTo('/');
+	},
+
+	getFormData() {
+		return {
+			title: this.refs.title.getDOMNode().value,
+			summary: this.refs.summary.getDOMNode().value
+		}
 	},
 
 	render() {
 		return (
 			<main>
 				<form onSubmit={this.handleSubmit}>
-					<input placeholder='Recipe Title' />
+					<input placeholder='Recipe Title' ref='title' />
 					<label>
 						<p>Summary</p>
-						<textarea></textarea>
+						<textarea ref='summary'></textarea>
 					</label>
 					<fieldset>
 						<legend>Ingredients</legend>
-						<input />
-						<input />
+						<input ref='ingredient1' />
+						<input ref='ingredient2' />
 					</fieldset>
 					<fieldset>
 						<legend>Instructions</legend>
-						<textarea></textarea>
-						<textarea></textarea>
+						<textarea ref='instruction1' ></textarea>
+						<textarea ref='instruction2'></textarea>
 					</fieldset>
 					<label>
 						<p>Prep time</p>
-						<input type='number' />
+						<input type='number' ref='prepTime'/>
 					</label>
 					<label>
 						<p>Cook time</p>
-						<input type='number' />
+						<input type='number' ref='cookTime' />
 					</label>
 					<button>
 						Submit Recipe

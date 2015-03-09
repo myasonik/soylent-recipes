@@ -7,10 +7,10 @@ var ProfileWidget = require('./profileWidget.jsx');
 var sessionStore = require('../../stores/sessionStore');
 
 var User = React.createClass({
-	mixins: [Reflux.listenTo(sessionStore, 'onStoreUpdate')],
+	mixins: [Reflux.connect(sessionStore, 'user')],
 	
 	getInitialState() {
-		return sessionStore.getDefaultData();
+		return { user: sessionStore.getDefaultData() };
 	},
 	
 	onStoreUpdate(user) {
@@ -18,7 +18,7 @@ var User = React.createClass({
 	},
 	
 	render() {
-		var user = this.state;
+		var user = this.state.user;
 
 		return (
 			<div>
