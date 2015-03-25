@@ -8,9 +8,12 @@ var New = React.createClass({
 
 	handleSubmit() {
 		event.preventDefault();
+
 		actions.add(Object.assign({
-			creator: 'me'
+			creator: 'me',
+			date: new Date(),
 		}, this.getFormData()));
+		
 		this.transitionTo('/');
 	},
 
