@@ -5,8 +5,8 @@ var ref = new Firebase('https://vivid-heat-5157.firebaseio.com');
 var usersRef = ref.child('users');
 
 var userData = {
-	username: '',
 	name: '',
+	picture: null,
 	auth: false
 };
 
@@ -15,16 +15,25 @@ var sessionStore = Reflux.createStore({
 	
 	init() {
 		this.user = userData;
-	
-		ref.onAuth((authData) => {
+
+		ref.onAuth(authData => {
 			if (authData) {
-				this.user = {
-					username: '',
-					name: authData.facebook.displayName.split(' ')[0],
-					auth: true
-				};
+				let thisUserRef = usersRef.child(authData.uid);
+
+				thisUserRef.once('value', snapshot => {
+					if (snapshot.exists()) {
+						this.user = snapshot;
+					} else {
+						let user = {
+							f_name: authData.facebook.displayName.split(' ')[0],
+							picture: authData.facebook.cachedUserProfile.picture.data.url,
+							auth: true
+						};
+						this.user = user;
+						thisUserRef.set(user);
+					}
+				});
 			} else {
-				console.log('Login Error');
 				this.user = userData;
 			}
 			

@@ -17,7 +17,7 @@ var Home = React.createClass({
 			<main>
 				<p>Home</p>
 				<ul>
-					{ this.state.recipes.map(recipe => <RecipeItem data={recipe} />) }
+					{ this.state.recipes.map(recipe => <RecipeItem key={recipe.id} data={recipe} />) }
 				</ul>
 			</main>
 		);
