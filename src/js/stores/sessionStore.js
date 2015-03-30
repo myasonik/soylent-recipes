@@ -19,7 +19,7 @@ var sessionStore = Reflux.createStore({
 		ref.onAuth(authData => {
 			if (authData) {
 				let thisUserRef = usersRef.child(authData.uid);
-
+				console.log(authData);
 				thisUserRef.once('value', snapshot => {
 					if (snapshot.exists()) {
 						this.user = snapshot.val();
@@ -27,7 +27,8 @@ var sessionStore = Reflux.createStore({
 						let user = {
 							f_name: authData.facebook.displayName.split(' ')[0],
 							picture: authData.facebook.cachedUserProfile.picture.data.url,
-							auth: true
+							auth: true,
+							id: authData.uid
 						};
 						this.user = user;
 						thisUserRef.set(user);

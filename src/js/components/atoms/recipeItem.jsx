@@ -8,6 +8,7 @@ var RecipeItem = React.createClass({
 			<li>
 				<span>{this.props.data.creator}</span>
 				<span>{this.props.data.rating}</span>
+				<span>{this.props.data.title}</span>
 				<span>{this.props.data.summary}</span>
 			</li>
 		);

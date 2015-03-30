@@ -1,16 +1,26 @@
 var React = require('react');
+var Reflux = require('reflux');
 var Router = require('react-router');
 
 var actions = require('../../actions/recipeActions');
+var sessionStore = require('../../stores/sessionStore')
 
 var New = React.createClass({
-	mixins: [ Router.Navigation ],
+	mixins: [
+				Router.Navigation,
+				Reflux.connect(sessionStore, 'user')
+			],
+
+	getInitialState() {
+		return { user: sessionStore.getDefaultData() };
+	},
 
 	handleSubmit() {
 		event.preventDefault();
 
 		actions.add(Object.assign({
-			creator: 'me',
+			creator: this.state.user.f_name,
+			creator_id: this.state.user.id,
 			date: new Date(),
 		}, this.getFormData()));
 		
