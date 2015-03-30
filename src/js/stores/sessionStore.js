@@ -22,7 +22,7 @@ var sessionStore = Reflux.createStore({
 
 				thisUserRef.once('value', snapshot => {
 					if (snapshot.exists()) {
-						this.user = snapshot;
+						this.user = snapshot.val();
 					} else {
 						let user = {
 							f_name: authData.facebook.displayName.split(' ')[0],
@@ -32,12 +32,14 @@ var sessionStore = Reflux.createStore({
 						this.user = user;
 						thisUserRef.set(user);
 					}
+					
+					this.trigger(this.user);
 				});
 			} else {
 				this.user = userData;
+				this.trigger(this.user);
 			}
-			
-			this.trigger(this.user);
+
 		});
 	},
 	

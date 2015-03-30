@@ -22,7 +22,7 @@ var User = React.createClass({
 
 		return (
 			<div>
-				{ user.auth ? <ProfileWidget name={user.name}/> : <Login /> }
+				{ user.auth ? <ProfileWidget name={user.f_name}/> : <Login /> }
 			</div>
 		);
 	}
