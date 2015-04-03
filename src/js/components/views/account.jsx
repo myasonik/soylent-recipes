@@ -4,10 +4,6 @@ var Link = require('react-router').Link;
 var actions = require('../../actions/sessionActions');
 
 var Account = React.createClass({
-	setName() {
-		actions.setName();
-	},
-
 	handleClick() {
 		actions.logout();
 	},

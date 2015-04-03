@@ -6,10 +6,10 @@ var RecipeItem = require('../atoms/recipeItem.jsx');
 var recipeStore = require('../../stores/recipeStore');
 
 var Home = React.createClass({
-	mixins: [Reflux.connect(recipeStore, 'recipes')],
+	mixins: [Reflux.connect(recipeStore)],
 
-	getInitialState() {
-		return { recipes: [] };
+	getDefaultState() {
+		return { recipes: recipeStore.getDefaultData() }
 	},
 
 	render() {
@@ -17,7 +17,7 @@ var Home = React.createClass({
 			<main>
 				<p>Home</p>
 				<ul>
-					{ this.state.recipes.map(recipe => <RecipeItem key={recipe.id} data={recipe} />) }
+					{ this.state.recipes && this.state.recipes.map(recipe => <RecipeItem key={recipe.id} data={recipe} />) }
 				</ul>
 			</main>
 		);

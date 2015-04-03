@@ -19,7 +19,6 @@ var sessionStore = Reflux.createStore({
 		ref.onAuth(authData => {
 			if (authData) {
 				let thisUserRef = usersRef.child(authData.uid);
-				console.log(authData);
 				thisUserRef.once('value', snapshot => {
 					if (snapshot.exists()) {
 						this.user = snapshot.val();

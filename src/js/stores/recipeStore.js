@@ -9,21 +9,28 @@ var sessionStore = Reflux.createStore({
 	listenables: actions,
 
 	init() {
+		this.recipes = [];
+		
 		recipeRef.on('value', snapshot => {
 			if (snapshot) {
 				let recipes = snapshot.val();
-				let arr = [];
+
 				for (let i of Object.keys(recipes)) {
-					arr.push(Object.assign({
+					this.data.recipes.push(Object.assign({
 						id: i
 					}, recipes[i]));
 				}
-				this.trigger(arr);
+				this.trigger(this.data);
+
 				// this.trigger([ for(i of Object.keys(recipes)) Object.assign({id: i, recipes[i]}) ]); // why doesn't this work?
 			} else {
 				console.log('Recipe update error.');
 			}
 		});
+	},
+
+	getDefaultData() {
+		return this.recipes;
 	}
 });
 
