@@ -1,9 +1,11 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Router = require('react-router');
+var slug = require('slug');
 
 var actions = require('../../actions/recipeActions');
-var sessionStore = require('../../stores/sessionStore')
+var sessionStore = require('../../stores/sessionStore');
+var recipeStore = require('../../stores/recipeStore');
 
 var New = React.createClass({
 	mixins: [
@@ -15,6 +17,10 @@ var New = React.createClass({
 		return { user: sessionStore.getDefaultData() };
 	},
 
+	slugify(title) {
+		return recipeStore.availableSlug(slug(title.toLowerCase()));
+	},
+
 	handleSubmit() {
 		event.preventDefault();
 
@@ -22,6 +28,7 @@ var New = React.createClass({
 			creator: this.state.user.f_name,
 			creator_id: this.state.user.id,
 			date: new Date(),
+			slug: this.slugify(this.refs.title.getDOMNode().value.trim())
 		}, this.getFormData()));
 		
 		this.transitionTo('/');
@@ -29,8 +36,8 @@ var New = React.createClass({
 
 	getFormData() {
 		return {
-			title: this.refs.title.getDOMNode().value,
-			summary: this.refs.summary.getDOMNode().value
+			title: this.refs.title.getDOMNode().value.trim(),
+			summary: this.refs.summary.getDOMNode().value.trim()
 		}
 	},
 

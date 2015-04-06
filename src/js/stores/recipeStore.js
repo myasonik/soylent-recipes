@@ -10,27 +10,39 @@ var sessionStore = Reflux.createStore({
 
 	init() {
 		this.recipes = [];
-		
+
 		recipeRef.on('value', snapshot => {
 			if (snapshot) {
-				let recipes = snapshot.val();
+				this.recipes = [];
 
-				for (let i of Object.keys(recipes)) {
-					this.data.recipes.push(Object.assign({
-						id: i
-					}, recipes[i]));
-				}
-				this.trigger(this.data);
+				snapshot.forEach(recipe => {
+					this.recipes.push(Object.assign({
+						id: recipe.key()
+					}, recipe.val()));
+				});
 
-				// this.trigger([ for(i of Object.keys(recipes)) Object.assign({id: i, recipes[i]}) ]); // why doesn't this work?
+				this.trigger(this.recipes);
 			} else {
 				console.log('Recipe update error.');
 			}
 		});
 	},
 
+	availableSlug(testSlug) {
+		let slugsLength = this.recipes.map(el => {
+			// Not perfect test but will match more, not less, so it's good enough
+			return el.slug.startsWith(testSlug);
+		}).length;
+
+		return slugsLength ? `${testSlug}-${slugsLength}` : testSlug;
+	},
+
 	getDefaultData() {
 		return this.recipes;
+	},
+
+	getRecipeBySlug(slug) {
+		return this.recipes.find(el => slug === el.slug ? slug : false);
 	}
 });
 

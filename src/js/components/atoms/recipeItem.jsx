@@ -4,12 +4,19 @@ var actions = require('../../actions/sessionActions');
 
 var RecipeItem = React.createClass({
 	render() {
+		let data = this.props.data;
+
 		return (
 			<li>
-				<span>{this.props.data.creator}</span>
-				<span>{this.props.data.rating}</span>
-				<span>{this.props.data.title}</span>
-				<span>{this.props.data.summary}</span>
+				<Link
+					to='recipe'
+					params={{recipeSlug: data.slug}}
+				>
+					<span>{data.creator}</span>
+					<span>{data.rating}</span>
+					<span>{data.title}</span>
+					<span>{data.summary}</span>
+				</Link>
 			</li>
 		);
 	}
